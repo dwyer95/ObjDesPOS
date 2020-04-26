@@ -9,10 +9,13 @@ package integration;
  */
 public class AccountingSystem {
 	
-	
-	public AccountingSystem AccountingSystem() {
-		AccountingSystem accounting = new AccountingSystem();
-		return accounting;
+	/**
+	 * Creates an instance of the AccountingSystem class.
+	 * 
+	 * @author Jacob Dwyer
+	 * 
+	 */
+	public AccountingSystem() {
+		
 	}
-
 }

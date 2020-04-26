@@ -1,5 +1,6 @@
 package controller;
 import integration.*;
+import model.*;
 
 /**
  * 
@@ -7,22 +8,39 @@ import integration.*;
  *
  */
 public class Controller {
+	private AccountingSystem accounting;
+	private InventorySystem inventory;
 	
-	public Controller Controller() {
-		Controller controller = new Controller();
-		return controller;
+	/**
+	 * Creates an instance of the Controller class.
+	 * 
+	 * @param accounting
+	 * @param inventory
+	 */
+	public Controller(AccountingSystem accounting, InventorySystem inventory) {
+		this.accounting = accounting;
+		this.inventory = inventory;
 	}
 	
-	public void initializeSale() {
+	public Sale initializeSale() {
+		return sale = new Sale();
+	}
+	
+	/**
+	 * When the cashier scans an item
+	 * 
+	 * @param itemID
+	 * @param quantity The quantity of an item. Default value is 1.
+	 */
+	public void enterItemIdentifier(Barcode itemID, int quantity) {
 		
+		if(itemIDExistsInDatabase) {
+			
+		}
 	}
 	
-	public void enterItemIdentifier() {
-		
-	}
-	
-	public Amount endSale(Amount totalPrice) {
-		return totalPrice;
+	public Amount endSale(Sale sale) {
+		return sale.getTotalPrice();
 	}
 	
 	public void signalDiscountRequest(CustomerID ID) {
@@ -30,7 +48,7 @@ public class Controller {
 	}
 	
 	public Amount enterPaidAmount(Amount paidAmount) {
-		return paidAmount
+		return paidAmount;
 	}
 
 }

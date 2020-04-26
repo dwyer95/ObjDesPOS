@@ -10,8 +10,15 @@ public class Date {
 	private int month;
 	private int year;
 	
-	public Date Date() {
-		Date date = new Date();
-		return date;
+	/**
+	 * Creates an instance of the Date class.
+	 * 
+	 * @author Jacob Dwyer
+	 * 
+	 */
+	public Date() {
+		this.day = day;
+		this.month = month;
+		this.year = year;
 	}
 }

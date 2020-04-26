@@ -1,4 +1,5 @@
 package model;
+import java.time.LocalDateTime;
 
 /**
  * 
@@ -6,8 +7,8 @@ package model;
  *
  */
 public class Sale {
-	private Date dateOfSale;
-	private Time timeOfSale;
+	private java.time.LocalDateTime dateOfSale;
+	private java.time.LocalDateTime timeOfSale;
 	private Address addressOfStore;
 	private Amount totalPrice;
 	private Amount amountPaid;
@@ -16,6 +17,24 @@ public class Sale {
 	
 	public Sale Sale() {
 		Sale sale = new Sale();
+		this.dateOfSale = java.time.LocalDateTime.now();
+		this.timeOfSale = java.time.LocalDateTime.now();
 		return sale;
+	}
+	
+	public void setAddress() {
+		addressOfStore = address;
+	}
+	
+	public java.time.LocalDateTime getDateOfSale(){
+		return dateOfSale;
+	}
+	
+	public java.time.LocalDateTime getTimeOfSale(){
+		return timeOfSale;
+	}
+	
+	public Amount getTotalPrice() {
+		return totalPrice;
 	}
 }

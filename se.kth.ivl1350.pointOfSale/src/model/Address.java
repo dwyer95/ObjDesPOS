@@ -11,7 +11,7 @@ public class Address {
 	private String city;
 
 	/**
-	 * Initializes a new Address instance.
+	 * Creates an instance of the Address class.
 	 * @return
 	 */
 	public Address Address(String street, int zipCode, String city) {
