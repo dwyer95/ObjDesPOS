@@ -1,6 +1,3 @@
-/**
- * 
- */
 package startup;
 import integration.*;
 import controller.*;
@@ -22,9 +19,8 @@ public class Main {
 		InventorySystem inventory = new InventorySystem();
 		Controller controller = new Controller(accounting, inventory);
 		CashRegister cashRegister = new CashRegister();
-		View view = new View();
+		View view = new View(controller);
 		
-		controller.initializeSale();
 	}
 
 }

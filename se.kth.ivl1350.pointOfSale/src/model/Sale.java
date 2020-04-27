@@ -1,5 +1,8 @@
 package model;
+import integration.*;
 import java.time.LocalDateTime;
+
+import datatypes.Amount;
 
 /**
  * 
@@ -22,19 +25,47 @@ public class Sale {
 		return sale;
 	}
 	
+	public void updateTotalPrice(ItemDTO itemDTO) {
+		
+	}
+	
+	public Amount addItem(ItemDTO item, int quantity) {
+		
+	}
+	
 	public void setAddress() {
 		addressOfStore = address;
 	}
 	
+	/**
+	 * 
+	 * @return The date in which the sale took place.
+	 */
 	public java.time.LocalDateTime getDateOfSale(){
 		return dateOfSale;
 	}
 	
+	/**
+	 * 
+	 * @return The time in which the sale took place.
+	 */
 	public java.time.LocalDateTime getTimeOfSale(){
 		return timeOfSale;
 	}
 	
+	/**
+	 * 
+	 * @return The total price of the sale.
+	 */
 	public Amount getTotalPrice() {
 		return totalPrice;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Amount getAmountPaid() {
+		return
 	}
 }

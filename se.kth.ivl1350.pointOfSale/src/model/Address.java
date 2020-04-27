@@ -12,10 +12,15 @@ public class Address {
 
 	/**
 	 * Creates an instance of the Address class.
-	 * @return
+	 * 
+	 * @param street The street in the city in which the store is located.
+	 * @param zipCode The zipcode of the store's address.
+	 * @param city The city in which the store is located.
+	 * @return The created instance.
 	 */
-	public Address Address(String street, int zipCode, String city) {
-		Address address = new Address();
-		return address;
+	public Address(String street, int zipCode, String city) {
+		this.street = street;
+		this.zipCode = zipCode;
+		this.city = city;
 	}
 }

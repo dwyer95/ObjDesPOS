@@ -1,5 +1,5 @@
 package integration;
-import model.*; // otillåtet???
+import datatypes.*;
 
 /**
  * 
@@ -9,8 +9,8 @@ import model.*; // otillåtet???
 public final class ItemDTO {
 	private final String name;
 	private final Amount price;
-	private final int VATRate;
-	private final Barcode ID;
+	private final float VATRate;
+	private final Barcode identifier;
 	
 	/**
 	 * Creates a new instance representing an item.
@@ -20,23 +20,36 @@ public final class ItemDTO {
 	 * @param VATRate	The tax rate of the item, which adds to its total price.
 	 * @param ID		The item's unique identifier in the inventory database.
 	 */
-	public ItemDTO(String name, Amount price, int VATRate, Barcode ID) {
+	public ItemDTO(String name, Amount price, float VATRate, Barcode identifier) {
 		this.name = name;
 		this.price = price;
 		this.VATRate = VATRate;
-		this.ID = ID;
+		this.identifier = identifier;
 	}
 	
+	/**
+	 * @return The name of the item.
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * @return The price of the item.
+	 */
 	public Amount getPrice() {
 		return price;
 	}
 	
-	public int getVATRate() {
+	/**
+	 * @return The item's VAT-rate. 
+	 */
+	public float getVATRate() {
 		return VATRate;
+	}
+	
+	public Barcode getIdentifier() {
+		return identifier;
 	}
 
 }

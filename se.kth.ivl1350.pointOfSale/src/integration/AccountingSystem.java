@@ -18,4 +18,8 @@ public class AccountingSystem {
 	public AccountingSystem() {
 		
 	}
+	
+	public void sendSaleInfo() {
+		
+	}
 }

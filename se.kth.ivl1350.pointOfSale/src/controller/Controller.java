@@ -1,4 +1,5 @@
 package controller;
+import datatypes.*;
 import integration.*;
 import model.*;
 
@@ -20,10 +21,23 @@ public class Controller {
 	public Controller(AccountingSystem accounting, InventorySystem inventory) {
 		this.accounting = accounting;
 		this.inventory = inventory;
+		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Sale initializeSale() {
-		return sale = new Sale();
+		Sale sale = new Sale();
+		return sale;
+	}
+	
+	/**
+	 * Bridge between View and InventorySystem.
+	 */
+	public void addItemsToAvailableItemsList() {
+		inventory.addItemsToAvailableItemsList();
 	}
 	
 	/**
@@ -32,22 +46,31 @@ public class Controller {
 	 * @param itemID
 	 * @param quantity The quantity of an item. Default value is 1.
 	 */
-	public void enterItemIdentifier(Barcode itemID, int quantity) {
+	public Item enterItemIdentifier(Barcode enteredItemID) {
+		Item retrievedItem;
 		
-		if(itemIDExistsInDatabase) {
-			
-		}
+		retrievedItem = inventory.retrieveInfo(enteredItem);
+		
+		return retrievedItem;
+		
 	}
 	
+	/**
+	 * Used to signify that the sale has ended.
+	 * @param sale
+	 * @return
+	 */
 	public Amount endSale(Sale sale) {
 		return sale.getTotalPrice();
 	}
 	
-	public void signalDiscountRequest(CustomerID ID) {
-		
-	}
-	
+	/**
+	 * 
+	 * @param paidAmount
+	 * @return
+	 */
 	public Amount enterPaidAmount(Amount paidAmount) {
+		Amount change = new Amount(54f);
 		return paidAmount;
 	}
 
