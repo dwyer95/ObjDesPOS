@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model;
 import java.time.LocalDateTime;
 
@@ -11,14 +8,12 @@ import datatypes.Address;
  *
  */
 public class Receipt {
-	private java.time.LocalDateTime dateOfSale;
-	private java.time.LocalDateTime timeOfSale;
+	private java.time.LocalDate dateOfSale;
+	private java.time.LocalTime timeOfSale;
 	private Address addressOfStore;
 	
-	public Receipt Receipt(Sale sale) {
-		Receipt receipt = new Receipt();
+	public Receipt(Sale sale) {
 		this.dateOfSale = sale.getDateOfSale();
 		this.timeOfSale = sale.getTimeOfSale(); 
-		return receipt;
 	}
 }

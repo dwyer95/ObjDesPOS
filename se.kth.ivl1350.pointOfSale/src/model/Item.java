@@ -28,12 +28,35 @@ public class Item {
 		this.quantity = quantity;
 	}
 	
-	public int getQuantity() {
-		return quantity;
+	@Override
+	public String toString() {
+		StringBuilder itemInfo = new StringBuilder();
+		itemInfo.append("name: " + name + ", ");
+		itemInfo.append("price: " + price.getAmount() + ", ");
+		itemInfo.append("VAT rate: " + VATRate + ", ");
+		itemInfo.append("ID: " + identifier.getBarcode() + ", ");
+		itemInfo.append("quantity: " + quantity);
+		return itemInfo.toString();
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public Amount getPrice() {
+		return price;
+	}
+	
+	public float getVATRate() {
+		return VATRate;
 	}
 	
 	public Barcode getIdentifier() {
 		return identifier;
 	}
-
+	
+	public int getQuantity() {
+		return quantity;
+	}
+	
 }

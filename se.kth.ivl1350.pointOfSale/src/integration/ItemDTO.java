@@ -27,6 +27,16 @@ public final class ItemDTO {
 		this.identifier = identifier;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder itemInfo = new StringBuilder();
+		itemInfo.append("name: " + name + ", ");
+		itemInfo.append("price: " + price.getAmount() + ", ");
+		itemInfo.append("VAT rate: " + VATRate + "%, ");
+		itemInfo.append("ID: " + identifier.getBarcode());
+		return itemInfo.toString();
+	}
+	
 	/**
 	 * @return The name of the item.
 	 */

@@ -1,5 +1,6 @@
 package integration;
 
+import model.Sale;
 import datatypes.Address;
 
 /**
@@ -21,12 +22,18 @@ public class AccountingSystem {
 		
 	}
 	
-	public void sendSaleInfo() {
+	/**
+	 * Sends information about the current sale to the external
+	 * accounting system.
+	 * 
+	 * @param sale The current sale.
+	 */
+	public void sendSaleInfo(Sale sale) {
 		
 	}
 	
 	public Address retrieveAddress() {
-		Address address = new Address("Cityville", 123456, "Avenue st. 7");
+		Address address = new Address("Avenue st. 7", 123456, "Cityville");
 		return address;
 	}
 }

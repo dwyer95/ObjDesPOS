@@ -1,4 +1,5 @@
 package view;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +28,12 @@ public class View {
 		ArrayList<Item> listOfCustomersItems = new ArrayList<Item>();
 		
 		Amount bananaPrice = new Amount(10f);
-		Barcode bananaBarcode = new Barcode(094531f);
+		Barcode bananaBarcode = new Barcode(945310);
 		Item oneBanana = new Item("Banana", bananaPrice, 25f, bananaBarcode, 1);
 		listOfCustomersItems.add(oneBanana);
 		
 		Amount cheesePrice = new Amount(43);
-		Barcode cheeseBarcode = new Barcode(173031f);
+		Barcode cheeseBarcode = new Barcode(173031);
 		Item threeCheese = new Item("Cheese", cheesePrice, 12f, cheeseBarcode, 3);
 		listOfCustomersItems.add(threeCheese);
 		
@@ -44,30 +45,35 @@ public class View {
 			ItemDTO scannedItem = new ItemDTO("a", bananaPrice, 0f, bananaBarcode);
 			
 			scannedItem = controller.enterItemIdentifier(itemCurrentlyBeingScanned.getIdentifier());
+			controller.addItemsToCurrentSale(itemCurrentlyBeingScanned);
+			
 			
 			int numberOfCurrentItem = itemCurrentlyBeingScanned.getQuantity();
 			while(numberOfCurrentItem != 0) {
-				controller.addToTotalPrice(scannedItem.getPrice());
-				//controller.getTotalPrice().add(scannedItem.getPrice());
+				System.out.println(scannedItem.toString());
+				Amount priceIncludingVAT = new Amount(controller.calculatePriceIncludingVAT(itemCurrentlyBeingScanned));
+				controller.addToTotalPrice(priceIncludingVAT);
 				numberOfCurrentItem--;
 			}
 			
 		}
-		System.out.println("Total price: " + controller.endSale().getAmount());
+		System.out.println("\nTotal price: " + controller.endSale().getAmount());
 		
-		Amount paidAmount = new Amount(150f);
+		Amount paidAmount = new Amount(160f);
 		controller.enterPaidAmount(paidAmount);
+
+		System.out.println("\n######### BEGINNING OF RECEIPT #########");
+		System.out.println("Date: " + controller.getDateOfSale());
+		System.out.println("Time: " + controller.getTimeOfSale().truncatedTo(ChronoUnit.SECONDS));
+		System.out.println(controller.getAddress());
+		controller.loopThroughSoldItems();
 		
-		//print out receipt
-		System.out.println("######### BEGINNING OF RECEIPT #########");
-		//System.out.println("Date: " + controller.getDateOfSale());
-		//System.out.println("Time: " + controller.getTimeOfSale());
 		//System.out.println("Total cost: " + controller.getTotalPrice());
-		System.out.println("############ END OF RECEIPT ############");
+		System.out.println("############ END OF RECEIPT ############\n");
 		
 		controller.setChange();
 		Amount change = controller.getChange();
 		
-		System.out.println("Money back: " + change.getAmount());
+		System.out.println("Money back: " + Math.floor(change.getAmount()));
 	}
 }

@@ -14,12 +14,12 @@ public class InventorySystem {
 	private static final String BANANA_NAME = "Banana";
 	private static final Amount BANANA_PRICE = new Amount(10f);
 	private static final float BANANA_VAT = 25f;
-	private static final Barcode BANANA_IDENTIFIER = new Barcode(094531f);
+	private static final Barcode BANANA_IDENTIFIER = new Barcode(945310);
 	
 	private static final String CHEESE_NAME = "Cheese";
 	private static final Amount CHEESE_PRICE = new Amount(43f);
 	private static final float CHEESE_VAT = 12f;
-	private static final Barcode CHEESE_IDENTIFIER = new Barcode(173031f);
+	private static final Barcode CHEESE_IDENTIFIER = new Barcode(173031);
 	
 	public InventorySystem InventorySystem() {
 		InventorySystem inventory = new InventorySystem();

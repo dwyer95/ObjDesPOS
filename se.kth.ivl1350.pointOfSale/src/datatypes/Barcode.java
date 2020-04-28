@@ -6,13 +6,13 @@ package datatypes;
  *
  */
 public class Barcode {
-	private float barcode;
+	private int barcode;
 	
-	public Barcode(float barcode) {
+	public Barcode(int barcode) {
 		this.barcode = barcode;
 	}
 	
-	public float getBarcode() {
+	public int getBarcode() {
 		return barcode;
 	}
 }

@@ -47,11 +47,11 @@ public class Controller {
 	 * @param quantity The quantity of an item. Default value is 1.
 	 */
 	public ItemDTO enterItemIdentifier(Barcode enteredItemID) {
-		//Item retrievedItem;
-		
 		return inventory.retrieveInfo(enteredItemID);
-		
-		//return retrievedItem;
+	}
+	
+	public void addItemsToCurrentSale(Item itemToAdd) {
+		sale.addItem(itemToAdd);
 	}
 	
 	/**
@@ -72,8 +72,35 @@ public class Controller {
 		sale.setAmountPaid(paidAmount);
 	}
 	
+	public float calculatePriceIncludingVAT(Item item) {
+		return item.getPrice().getAmount() + (item.getPrice().getAmount() * (item.getVATRate() / 100));
+	}
+	
 	public void addToTotalPrice(Amount itemPrice) {
-		this.sale.getTotalPrice().add(itemPrice);
+		sale.getTotalPrice().add(itemPrice);
+	}
+	
+	public java.time.LocalDate getDateOfSale(){
+		return sale.getDateOfSale();
+	}
+	
+	public java.time.LocalTime getTimeOfSale(){
+		return sale.getTimeOfSale();
+	}
+	
+	public Address getAddress() {
+		return sale.getAddress();
+	}
+	
+	public void loopThroughSoldItems() {
+		sale.loopThroughSoldItems();
+	}
+	
+	/**
+	 * Sends information about the sale to the external accounting system.
+	 */
+	public void sendSaleInfo() {
+		accounting.sendSaleInfo(sale);
 	}
 	
 	public Amount getChange() {

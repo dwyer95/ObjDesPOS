@@ -35,20 +35,33 @@ public class Sale {
 		soldItems.add(itemToAdd);
 	}
 	
+	public void loopThroughSoldItems() {
+		for(Item item : soldItems) {
+			if(item.getQuantity() > 1)
+				System.out.println(item.getName() + " *" + item.getQuantity() + "\t" + item.getPrice().getAmount());
+			else
+				System.out.println(item.getName() + "  \t" + item.getPrice().getAmount());
+		}
+	}
+	
 	/**
 	 * 
 	 * @return The date in which the sale took place.
 	 */
-	public java.time.LocalDateTime getDateOfSale(){
-		return dateOfSale;
+	public java.time.LocalDate getDateOfSale(){
+		return dateOfSale.toLocalDate();
 	}
 	
 	/**
 	 * 
 	 * @return The time in which the sale took place.
 	 */
-	public java.time.LocalDateTime getTimeOfSale(){
-		return timeOfSale;
+	public java.time.LocalTime getTimeOfSale(){
+		return timeOfSale.toLocalTime();
+	}
+	
+	public Address getAddress() {
+		return addressOfStore;
 	}
 	
 	/**
@@ -86,6 +99,6 @@ public class Sale {
 	}
 	
 	public void setChange() {
-		change.setAmount(totalPrice.getAmount() - amountPaid.getAmount());
+		change.setAmount(amountPaid.getAmount() - totalPrice.getAmount());
 	}
 }
