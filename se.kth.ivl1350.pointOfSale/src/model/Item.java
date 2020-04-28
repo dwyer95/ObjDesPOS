@@ -20,11 +20,11 @@ public class Item {
 	 * Creates an instance of the Item class.
 	 * 
 	 */
-	public Item(String name, Amount price, Barcode identifier, float VATRate, int quantity) {
+	public Item(String name, Amount price, float VATRate, Barcode identifier, int quantity) {
 		this.name = name;
 		this.price = price;
-		this.identifier = identifier;
 		this.VATRate = VATRate;
+		this.identifier = identifier;
 		this.quantity = quantity;
 	}
 	

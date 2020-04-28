@@ -46,13 +46,12 @@ public class Controller {
 	 * @param itemID
 	 * @param quantity The quantity of an item. Default value is 1.
 	 */
-	public Item enterItemIdentifier(Barcode enteredItemID) {
-		Item retrievedItem;
+	public ItemDTO enterItemIdentifier(Barcode enteredItemID) {
+		//Item retrievedItem;
 		
-		retrievedItem = inventory.retrieveInfo(enteredItem);
+		return inventory.retrieveInfo(enteredItemID);
 		
-		return retrievedItem;
-		
+		//return retrievedItem;
 	}
 	
 	/**

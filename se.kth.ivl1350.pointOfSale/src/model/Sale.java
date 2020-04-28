@@ -25,10 +25,6 @@ public class Sale {
 		return sale;
 	}
 	
-	public void updateTotalPrice(ItemDTO itemDTO) {
-		
-	}
-	
 	public Amount addItem(ItemDTO item, int quantity) {
 		
 	}
@@ -67,5 +63,15 @@ public class Sale {
 	 */
 	public Amount getAmountPaid() {
 		return
+	}
+	
+	public void updateTotalPrice(Amount priceOfCurrentItems) {
+		float currentTotal = totalPrice.getAmount();
+		currentTotal += priceOfCurrentItems.getAmount();
+		totalPrice = currentTotal;
+	}
+	
+	public void setTotalPrice(Amount newTotalPrice) {
+		
 	}
 }

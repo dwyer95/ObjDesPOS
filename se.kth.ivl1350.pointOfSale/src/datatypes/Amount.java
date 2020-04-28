@@ -12,6 +12,10 @@ public class Amount {
 	}
 	
 	
+	public void add(Amount termToAddWith) {
+		amount += termToAddWith.getAmount();
+	}
+	
 	public void subtract(Amount termToSubtractWith) {
 		amount -= termToSubtractWith.getAmount();
 	}

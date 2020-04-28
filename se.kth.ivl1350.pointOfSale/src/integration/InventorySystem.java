@@ -42,12 +42,13 @@ public class InventorySystem {
 	 * 
 	 * @return
 	 */
-	public ItemDTO retrieveInfo(Item enteredItem) {
+	public ItemDTO retrieveInfo(Barcode enteredItemID) {
 		// loop through list of items
 		for(ItemDTO item : availableItems)
-			if(item.getIdentifier() == enteredItem.getIdentifier())
+			if(item.getIdentifier() == enteredItemID)
 				return item;
 		
+		return null;
 	}
 	
 	
