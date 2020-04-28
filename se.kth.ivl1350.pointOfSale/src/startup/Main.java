@@ -21,6 +21,7 @@ public class Main {
 		CashRegister cashRegister = new CashRegister();
 		View view = new View(controller);
 		
+		view.hardCodedUseCase();
 	}
 
 }

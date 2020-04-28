@@ -20,8 +20,16 @@ public class Amount {
 		amount -= termToSubtractWith.getAmount();
 	}
 	
+	public void multiply(Amount termToMultiplyWith) {
+		amount *= termToMultiplyWith.getAmount();
+	}
+	
 	public float getAmount() {
 		return amount;
+	}
+	
+	public void setAmount(float amount) {
+		this.amount = amount;
 	}
 
 }

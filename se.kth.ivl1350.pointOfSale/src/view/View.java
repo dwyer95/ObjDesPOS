@@ -1,4 +1,5 @@
 package view;
+import java.util.ArrayList;
 import java.util.List;
 
 import controller.*;
@@ -23,7 +24,7 @@ public class View {
 	 *  having a fully functional user interface
 	 */
 	public void hardCodedUseCase() {
-		List<Item> listOfCustomersItems;
+		ArrayList<Item> listOfCustomersItems = new ArrayList<Item>();
 		
 		Amount bananaPrice = new Amount(10f);
 		Barcode bananaBarcode = new Barcode(094531f);
@@ -36,28 +37,37 @@ public class View {
 		listOfCustomersItems.add(threeCheese);
 		
 		controller.addItemsToAvailableItemsList();
-		Sale sale = controller.initializeSale();
 		
-		//int itemsLeftToScan = 0;
+		controller.initializeSale();
 		
-		for(Item item : listOfCustomersItems) {
-			//scan item
-			ItemDTO scannedItem = controller.enterItemIdentifier(item.getIdentifier());
-			// add itemprice to cost
-			sale.getTotalPrice().add(scannedItem.getPrice().getAmount() * item.getQuantity());
+		for(Item itemCurrentlyBeingScanned : listOfCustomersItems) {
+			ItemDTO scannedItem = new ItemDTO("a", bananaPrice, 0f, bananaBarcode);
+			
+			scannedItem = controller.enterItemIdentifier(itemCurrentlyBeingScanned.getIdentifier());
+			
+			int numberOfCurrentItem = itemCurrentlyBeingScanned.getQuantity();
+			while(numberOfCurrentItem != 0) {
+				controller.addToTotalPrice(scannedItem.getPrice());
+				//controller.getTotalPrice().add(scannedItem.getPrice());
+				numberOfCurrentItem--;
+			}
+			
 		}
+		System.out.println("Total price: " + controller.endSale().getAmount());
 		
+		Amount paidAmount = new Amount(150f);
+		controller.enterPaidAmount(paidAmount);
 		
-		// receive money from customer
-		// calculate difference
-		// give back change
-		
-		//print our receipt
+		//print out receipt
 		System.out.println("######### BEGINNING OF RECEIPT #########");
-		System.out.println("Date: " + sale.getDateOfSale());
-		System.out.println("Time: " + sale.getTimeOfSale());
-		System.out.println("Total cost: " + sale.getTotalPrice());
+		//System.out.println("Date: " + controller.getDateOfSale());
+		//System.out.println("Time: " + controller.getTimeOfSale());
+		//System.out.println("Total cost: " + controller.getTotalPrice());
 		System.out.println("############ END OF RECEIPT ############");
-		controller.endSale(sale);
+		
+		controller.setChange();
+		Amount change = controller.getChange();
+		
+		System.out.println("Money back: " + change.getAmount());
 	}
 }

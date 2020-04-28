@@ -11,6 +11,7 @@ import model.*;
 public class Controller {
 	private AccountingSystem accounting;
 	private InventorySystem inventory;
+	private Sale sale;
 	
 	/**
 	 * Creates an instance of the Controller class.
@@ -28,9 +29,8 @@ public class Controller {
 	 * 
 	 * @return
 	 */
-	public Sale initializeSale() {
-		Sale sale = new Sale();
-		return sale;
+	public void initializeSale() {
+		sale = new Sale(accounting.retrieveAddress());
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class Controller {
 	 * @param sale
 	 * @return
 	 */
-	public Amount endSale(Sale sale) {
+	public Amount endSale() {
 		return sale.getTotalPrice();
 	}
 	
@@ -68,9 +68,20 @@ public class Controller {
 	 * @param paidAmount
 	 * @return
 	 */
-	public Amount enterPaidAmount(Amount paidAmount) {
-		Amount change = new Amount(54f);
-		return paidAmount;
+	public void enterPaidAmount(Amount paidAmount) {
+		sale.setAmountPaid(paidAmount);
+	}
+	
+	public void addToTotalPrice(Amount itemPrice) {
+		this.sale.getTotalPrice().add(itemPrice);
+	}
+	
+	public Amount getChange() {
+		return sale.getChange();
+	}
+	
+	public void setChange() {
+		sale.setChange();
 	}
 
 }

@@ -45,7 +45,7 @@ public class InventorySystem {
 	public ItemDTO retrieveInfo(Barcode enteredItemID) {
 		// loop through list of items
 		for(ItemDTO item : availableItems)
-			if(item.getIdentifier() == enteredItemID)
+			if(item.getIdentifier().getBarcode() == enteredItemID.getBarcode())
 				return item;
 		
 		return null;

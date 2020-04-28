@@ -4,6 +4,8 @@
 package model;
 import java.time.LocalDateTime;
 
+import datatypes.Address;
+
 /**
  * @author Jacob Dwyer
  *

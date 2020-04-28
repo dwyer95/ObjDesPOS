@@ -1,5 +1,7 @@
 package integration;
 
+import datatypes.Address;
+
 /**
  * 
  * The handler that communicates with the external accounting system.
@@ -21,5 +23,10 @@ public class AccountingSystem {
 	
 	public void sendSaleInfo() {
 		
+	}
+	
+	public Address retrieveAddress() {
+		Address address = new Address("Cityville", 123456, "Avenue st. 7");
+		return address;
 	}
 }

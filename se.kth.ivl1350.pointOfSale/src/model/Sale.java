@@ -1,8 +1,11 @@
 package model;
 import integration.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
+import datatypes.Address;
 import datatypes.Amount;
+
 
 /**
  * 
@@ -13,24 +16,23 @@ public class Sale {
 	private java.time.LocalDateTime dateOfSale;
 	private java.time.LocalDateTime timeOfSale;
 	private Address addressOfStore;
+	private ArrayList<Item> soldItems;
 	private Amount totalPrice;
 	private Amount amountPaid;
-	private Item soldItem;
 	private Amount change;
 	
-	public Sale Sale() {
-		Sale sale = new Sale();
+	public Sale(Address address) {
 		this.dateOfSale = java.time.LocalDateTime.now();
 		this.timeOfSale = java.time.LocalDateTime.now();
-		return sale;
-	}
-	
-	public Amount addItem(ItemDTO item, int quantity) {
-		
-	}
-	
-	public void setAddress() {
 		addressOfStore = address;
+		soldItems = new ArrayList<Item>();
+		totalPrice = new Amount(0f);
+		amountPaid = new Amount(0f);
+		change = new Amount(0f);
+	}
+	
+	public void addItem(Item itemToAdd) {
+		soldItems.add(itemToAdd);
 	}
 	
 	/**
@@ -62,16 +64,28 @@ public class Sale {
 	 * @return
 	 */
 	public Amount getAmountPaid() {
-		return
+		return amountPaid;
 	}
 	
-	public void updateTotalPrice(Amount priceOfCurrentItems) {
+	/*public void updateTotalPrice(Amount priceOfCurrentItems) {
 		float currentTotal = totalPrice.getAmount();
 		currentTotal += priceOfCurrentItems.getAmount();
 		totalPrice = currentTotal;
-	}
+	}*/
 	
 	public void setTotalPrice(Amount newTotalPrice) {
 		
+	}
+	
+	public void setAmountPaid(Amount amountReceived) {
+		amountPaid = amountReceived;
+	}
+	
+	public Amount getChange() {
+		return change;
+	}
+	
+	public void setChange() {
+		change.setAmount(totalPrice.getAmount() - amountPaid.getAmount());
 	}
 }

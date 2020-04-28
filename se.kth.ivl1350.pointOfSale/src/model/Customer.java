@@ -1,7 +1,7 @@
 package model;
 
 public class Customer {
-	private CustomerID customerID;
+	//private CustomerID customerID;
 	
 	/**
 	 * Creates an instance of the customer class.
