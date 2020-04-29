@@ -1,5 +1,10 @@
 package datatypes;
 
+/**
+ * Represents the <code>Barcode</code> on an <code>Item</code>
+ * @author Jacob Dwyer
+ *
+ */
 public class Barcode {
 	private int barcode;
 	
@@ -11,10 +16,6 @@ public class Barcode {
 		this.barcode = barcode;
 	}
 	
-	/**
-	 * Gets the barcode.
-	 * @return The barcode to return.
-	 */
 	public int getBarcode() {
 		return barcode;
 	}

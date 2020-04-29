@@ -9,20 +9,18 @@ import datatypes.Address;
 public class AccountingSystem {
 	
 	/**
-	 * Creates an instance of the AccountingSystem class.
+	 * Creates an instance of the <code>AccountingSystem</code> class.
 	 */
 	public AccountingSystem() {
-		
 	}
 	
 	/**
 	 * Sends information about the current sale to the external
-	 * accounting system.
-	 * 
-	 * @param sale The current sale.
+	 * accounting system. Does nothing at the moment as the task
+	 * did not involve external systems.
+	 * @param sale The current <code>Sale</code>.
 	 */
 	public void sendSaleInfo(Sale sale) {
-		
 	}
 	
 	/**

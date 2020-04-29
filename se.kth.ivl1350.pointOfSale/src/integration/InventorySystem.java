@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import model.Item;
 import datatypes.*;
 
+/**
+ * Represents the handler that communicates with the external inventory system.
+ * @author Jacob Dwyer
+ *
+ */
 public class InventorySystem {
 	private ArrayList<ItemDTO> availableItems = new ArrayList<ItemDTO>();
 	
@@ -20,7 +25,6 @@ public class InventorySystem {
 	 * Creates an instance of the InventorySystem class.
 	 */
 	public InventorySystem() {
-		
 	}
 	
 	/**
@@ -36,14 +40,20 @@ public class InventorySystem {
 	
 	/**
 	 * Returns information about scanned item. 
+	 * @param enteredItemID The entered item's identifier.
 	 * @return The information which is returned.
 	 */
 	public ItemDTO retrieveInfo(Barcode enteredItemID) {
-		// loop through list of items
+		if(enteredItemID == null) {
+			System.out.println("The input identifier is null.");
+			return null;
+		}
+		
 		for(ItemDTO item : availableItems)
 			if(item.getIdentifier().getBarcode() == enteredItemID.getBarcode())
 				return item;
 		
+		System.out.println("Entered identifier did not match any item in inventory.");
 		return null;
 	}
 }

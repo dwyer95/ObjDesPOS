@@ -1,5 +1,8 @@
 package datatypes;
 
+/**
+ * Represents the address of a store.
+ */
 public class Address {
 	private String name;
 	private String street;
@@ -8,7 +11,6 @@ public class Address {
 
 	/**
 	 * Creates a new instance of the <code>Address</code> class.
-	 * 
 	 * @param street Tells which street the store is on.
 	 * @param zipCode Tells which zipcode the store uses. 
 	 * @param city Tells what city the store is located in.

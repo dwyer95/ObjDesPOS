@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import datatypes.Address;
 import datatypes.Amount;
 
+/**
+ * Represents a single sale.
+ */
 public class Sale {
 	private static final int VAT_DIVISOR = 100;
 	
@@ -21,7 +24,7 @@ public class Sale {
 	
 	/**
 	 * Creates a new instance of the <code>Sale</code> class.
-	 * @param address 
+	 * @param address The location of the store.
 	 */
 	public Sale(Address address) {
 		this.dateOfSale = java.time.LocalDateTime.now();
@@ -37,11 +40,14 @@ public class Sale {
 	
 	/**
 	 * Adds an <code>Item</code> to the <code>ArrayList</code> <code>soldItem</code> in this
-	 * instance of <code>Sale</code>.
+	 * instance of <code>Sale</code>. If itemToAdd is null, do nothing.
 	 * @param itemToAdd The <code>Item</code> to add to the list.
 	 */
 	public void addItem(Item itemToAdd) {
-		soldItems.add(itemToAdd);
+		if(itemToAdd == null)
+			return;
+		else
+			soldItems.add(itemToAdd);
 	}
 	
 	/**
@@ -72,7 +78,8 @@ public class Sale {
 	 * @return The total price, including VAT, of the <code>Item</code>.
 	 */
 	public float calculatePriceIncludingVAT(Item item) {
-		return item.getPrice().getAmount() + (item.getPrice().getAmount() * (item.getVATRate() / VAT_DIVISOR));
+		return item.getPrice().getAmount() + (item.getPrice().getAmount() * 
+				 (item.getVATRate() / VAT_DIVISOR));
 	}
 	
 	/**
@@ -91,6 +98,10 @@ public class Sale {
 		totalPriceOfVAT.add(priceOfVAT);
 	}
 	
+	/**
+	 * Creates an instance of the <code>Receipt</code> class.
+	 * @return The created receipt.
+	 */
 	public Receipt createReceipt() {
 		Receipt receipt = new Receipt(this);
 		return receipt;

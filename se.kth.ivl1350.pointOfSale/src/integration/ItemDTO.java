@@ -1,6 +1,9 @@
 package integration;
 import datatypes.*;
 
+/**
+ * Represents a data transfer object (DTO) of the <code>Item</code> class.
+ */
 public final class ItemDTO {
 	private final String name;
 	private final Amount price;
@@ -42,31 +45,18 @@ public final class ItemDTO {
 		return itemInfo.toString();
 	}
 	
-	/**
-	 * @return The name of the item.
-	 */
 	public String getName() {
 		return name;
 	}
 	
-	/**
-	 * @return The price of the item.
-	 */
 	public Amount getPrice() {
 		return price;
 	}
 	
-	/**
-	 * @return The item's VAT-rate. 
-	 */
 	public float getVATRate() {
 		return VATRate;
 	}
 	
-	/**
-	 * 
-	 * @return The item's identifier.
-	 */
 	public Barcode getIdentifier() {
 		return identifier;
 	}

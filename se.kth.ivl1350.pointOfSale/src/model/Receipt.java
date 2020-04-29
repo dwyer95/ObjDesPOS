@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import datatypes.Address;
 import datatypes.Amount;
 
+/**
+ * Represents the <code>Receipt</code> that the customer receives after a sale.
+ */
 public class Receipt {
 	private java.time.LocalDate dateOfSale;
 	private java.time.LocalTime timeOfSale;
@@ -39,7 +42,7 @@ public class Receipt {
 	 * Used when printing text with a <code>StringBuilder</code> class.
 	 * @param builder The StringBuilder to append to.
 	 */
-	public void printItemList(StringBuilder builder) {
+	private void printItemList(StringBuilder builder) {
 		for(Item item : soldItems)
 			builder.append("\n" + item.getName() + "\t*" + item.getQuantity() + "\t\t" + item.getPrice().getAmount());
 	}

@@ -3,13 +3,16 @@ import datatypes.Amount;
 import datatypes.Barcode;
 import integration.ItemDTO;
 
+/**
+ * Represents an <code>Item</code> that a customer brings to the
+ * point-of-sale.
+ */
 public class Item {
 	private String name;
 	private Amount price;
 	private float VATRate;
 	private Barcode identifier;
 	private int quantity;
-	
 	
 	/**
 	 * Creates an instance of the <code>Item</code> class with parameters.
@@ -51,42 +54,22 @@ public class Item {
 		return itemInfo.toString();
 	}
 	
-	/**
-	 * Gets the name of the <code>Item</code>.
-	 * @return The <code>Item</code>'s name.
-	 */
 	public String getName() {
 		return name;
 	}
 	
-	/**
-	 * Gets the price of the <code>Item</code> as an <code>Amount</code>.
-	 * @return The <code>Item</code>'s price.
-	 */
 	public Amount getPrice() {
 		return price;
 	}
 	
-	/**
-	 *  Gets the VAT-rate of the <code>Item</code>.
-	 * @return The <code>Item</code>'s VAT-rate.
-	 */
 	public float getVATRate() {
 		return VATRate;
 	}
 	
-	/**
-	 * Gets the identifier of the <code>Item</code> in the form of a <code>Barcode</code>.
-	 * @return The <code>Item</code>'s identifier.
-	 */
 	public Barcode getIdentifier() {
 		return identifier;
 	}
 	
-	/**
-	 * Gets the quantity of the <code>Item</code>.
-	 * @return The <code>Item</code>'s quantity.
-	 */
 	public int getQuantity() {
 		return quantity;
 	}

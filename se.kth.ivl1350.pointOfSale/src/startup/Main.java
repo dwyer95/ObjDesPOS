@@ -4,6 +4,9 @@ import controller.*;
 import model.*;
 import view.*;
 
+/**
+ *Represents the startup of the system.
+ */
 public class Main {
 	
 	/**

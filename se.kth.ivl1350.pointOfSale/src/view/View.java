@@ -8,6 +8,9 @@ import model.*;
 import integration.*;
 import datatypes.*;
 
+/**
+ *Represents the display that the cashier uses.
+ */
 public class View {
 	private Controller controller;
 	
@@ -42,7 +45,6 @@ public class View {
 			scannedItem = controller.enterItemIdentifier(itemCurrentlyBeingScanned.getIdentifier());
 			controller.addItemsToCurrentSale(itemCurrentlyBeingScanned);
 			
-			
 			int numberOfCurrentItem = itemCurrentlyBeingScanned.getQuantity();
 			while(numberOfCurrentItem != 0) {
 				System.out.println(scannedItem.toString());
@@ -55,8 +57,8 @@ public class View {
 				controller.addToTotalPriceOfItemsIncludingVAT(priceIncludingVAT);
 				numberOfCurrentItem--;
 			}
-			
 		}
+		
 		System.out.println("\nTotal price: " + controller.endSale().getAmount());
 		
 		Amount paidAmount = new Amount(160f);

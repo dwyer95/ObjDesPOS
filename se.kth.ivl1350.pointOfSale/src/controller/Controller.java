@@ -3,6 +3,10 @@ import datatypes.*;
 import integration.*;
 import model.*;
 
+/**
+ *Represents the controller class which communicates with the classes in the other
+ *packages and view.
+ */
 public class Controller {
 	private AccountingSystem accounting;
 	private InventorySystem inventory;
@@ -11,10 +15,10 @@ public class Controller {
 	private Receipt receipt;
 	
 	/**
-	 * Creates an instance of the Controller class.
-	 * 
-	 * @param accounting
-	 * @param inventory
+	 * Creates an instance of the controller class.
+	 * @param accounting The accounting system handler that the controller communicates with.
+	 * @param inventory The inventory system handler that the controller communicates with.
+	 * @param printer The printer handler that the controller communicates with.
 	 */
 	public Controller(AccountingSystem accounting, InventorySystem inventory, Printer printer) {
 		this.accounting = accounting;
@@ -23,75 +27,108 @@ public class Controller {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Marks the beginning of the sale.
 	 */
 	public void initializeSale() {
 		sale = new Sale(accounting.retrieveAddress());
 	}
 	
 	/**
-	 * Bridge between View and InventorySystem.
+	 * Calls the corresponding method in the inventory system handler.
 	 */
 	public void addItemsToAvailableItemsList() {
 		inventory.addItemsToAvailableItemsList();
 	}
 	
 	/**
-	 * When the cashier scans an item
-	 * 
-	 * @param itemID
-	 * @param quantity The quantity of an item. Default value is 1.
+	 * Calls the corresponding method in the inventory system handler.
+	 * @param enteredItemID The barcode use to search the inventory system.
+	 * @return The ItemDTO retrieved from the inventory system handler.
 	 */
 	public ItemDTO enterItemIdentifier(Barcode enteredItemID) {
 		return inventory.retrieveInfo(enteredItemID);
 	}
 	
+	/**
+	 * Calls the corresponding method in the inventory system handler.
+	 * @param itemToAdd The item to add.
+	 */
 	public void addItemsToCurrentSale(Item itemToAdd) {
 		sale.addItem(itemToAdd);
 	}
 	
 	/**
-	 * Used to signify that the sale has ended.
-	 * @param sale
-	 * @return
+	 * Used to signify that the <code>Sale</code> has ended.
+	 * @return The total price, including VAT.
 	 */
 	public Amount endSale() {
 		return sale.getTotalPriceOfItemsIncludingVAT();
 	}
 	
 	/**
-	 * 
-	 * @param paidAmount
-	 * @return
+	 * Calls the corresponding method in a <code>Sale</code> instance.
+	 * @param paidAmount The amount paid by the customer.
 	 */
 	public void enterPaidAmount(Amount paidAmount) {
 		sale.setAmountPaid(paidAmount);
 	}
 	
+	/**
+	 * Calls the corresponding method in a <code>Sale</code> instance.
+	 * @param item The <code>Item</code> to calculate the VAT of.
+	 * @return The price of the VAT.
+	 */
 	public float calculatePriceOfVAT(Item item) {
 		return sale.calculatePriceOfVAT(item);
 	}
 	
+	/**
+	 * Calls the corresponding method in a <code>Sale</code> instance. 
+	 * @param item The <code>Item</code> to calculate the price, including VAT, of.
+	 * @return The price, including VAT.
+	 */
 	public float calculatePriceIncludingVAT(Item item) {
 		return sale.calculatePriceIncludingVAT(item);
 	}
 	
+	/**
+	 * Calls the corresponding method in a <code>Sale</code> instance. 
+	 * @param priceOfItem The price to be added.
+	 */
 	public void addToTotalPriceOfItems(Amount priceOfItem) {
 		sale.addToTotalPriceOfItems(priceOfItem);
 	}
 	
+	/**
+	 * Calls the corresponding method in a <code>Sale</code> instance. 
+	 * @param priceOfVAT The price to be added.
+	 */
 	public void addToTotalPriceOfVAT(Amount priceOfVAT) {
 		sale.addToTotalPriceOfVAT(priceOfVAT);
 	}
 	
+	/**
+	 * Calls the corresponding method in a <code>Sale</code> instance. 
+	 * @param itemPrice The price to be added.
+	 */
 	public void addToTotalPriceOfItemsIncludingVAT(Amount itemPrice) {
 		sale.getTotalPriceOfItemsIncludingVAT().add(itemPrice);
 	}
 	
+	/**
+	 * Creates a <code>Receipt</code> locally and calls the corresponding method 
+	 * in a <code>Printer</code> instance. 
+	 */
 	public void printReceipt() {
 		receipt = sale.createReceipt();
 		printer.printReceipt(receipt);
+	}
+
+	/**
+	 * Calls the corresponding method in an <code>AccountingSystem</code> instance. 
+	 */
+	public void sendSaleInfo() {
+		accounting.sendSaleInfo(sale);
 	}
 	
 	public java.time.LocalDate getDateOfSale(){
@@ -108,13 +145,6 @@ public class Controller {
 	
 	public void printListOfSoldItems() {
 		sale.printListOfSoldItems();
-	}
-	
-	/**
-	 * Sends information about the sale to the external accounting system.
-	 */
-	public void sendSaleInfo() {
-		accounting.sendSaleInfo(sale);
 	}
 	
 	public Amount getTotalPriceOfItems() {
