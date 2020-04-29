@@ -5,8 +5,6 @@ import datatypes.*;
 
 /**
  * Represents the handler that communicates with the external inventory system.
- * @author Jacob Dwyer
- *
  */
 public class InventorySystem {
 	private ArrayList<ItemDTO> availableItems = new ArrayList<ItemDTO>();

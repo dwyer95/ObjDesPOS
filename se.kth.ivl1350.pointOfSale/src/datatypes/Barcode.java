@@ -1,9 +1,7 @@
 package datatypes;
 
 /**
- * Represents the <code>Barcode</code> on an <code>Item</code>
- * @author Jacob Dwyer
- *
+ * Represents the <code>Barcode</code> on an <code>Item</code>.
  */
 public class Barcode {
 	private int barcode;

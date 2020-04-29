@@ -3,8 +3,6 @@ import model.Receipt;
 
 /**
  * Represents the handler that communicates with the external printer.
- * @author Jacob Dwyer
- *
  */
 public class Printer {
 
