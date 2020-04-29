@@ -4,19 +4,12 @@ import model.Sale;
 import datatypes.Address;
 
 /**
- * 
  * The handler that communicates with the external accounting system.
- * 
- * @author Jacob Dwyer
- *
  */
 public class AccountingSystem {
 	
 	/**
 	 * Creates an instance of the AccountingSystem class.
-	 * 
-	 * @author Jacob Dwyer
-	 * 
 	 */
 	public AccountingSystem() {
 		
@@ -32,6 +25,12 @@ public class AccountingSystem {
 		
 	}
 	
+	/**
+	 * Retrieves the address of the store from the external accounting system.
+	 * Since external systems are not used for this task, an <code>Address</code> is created
+	 * locally instead.
+	 * @return The address of the store.
+	 */
 	public Address retrieveAddress() {
 		Address address = new Address("Avenue st. 7", 123456, "Cityville");
 		return address;

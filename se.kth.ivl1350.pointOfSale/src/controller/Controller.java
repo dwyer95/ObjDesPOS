@@ -3,15 +3,12 @@ import datatypes.*;
 import integration.*;
 import model.*;
 
-/**
- * 
- * @author Jacob Dwyer
- *
- */
 public class Controller {
 	private AccountingSystem accounting;
 	private InventorySystem inventory;
+	private Printer printer;
 	private Sale sale;
+	private Receipt receipt;
 	
 	/**
 	 * Creates an instance of the Controller class.
@@ -19,10 +16,10 @@ public class Controller {
 	 * @param accounting
 	 * @param inventory
 	 */
-	public Controller(AccountingSystem accounting, InventorySystem inventory) {
+	public Controller(AccountingSystem accounting, InventorySystem inventory, Printer printer) {
 		this.accounting = accounting;
 		this.inventory = inventory;
-		
+		this.printer = printer;
 	}
 	
 	/**
@@ -60,7 +57,7 @@ public class Controller {
 	 * @return
 	 */
 	public Amount endSale() {
-		return sale.getTotalPrice();
+		return sale.getTotalPriceOfItemsIncludingVAT();
 	}
 	
 	/**
@@ -72,12 +69,29 @@ public class Controller {
 		sale.setAmountPaid(paidAmount);
 	}
 	
-	public float calculatePriceIncludingVAT(Item item) {
-		return item.getPrice().getAmount() + (item.getPrice().getAmount() * (item.getVATRate() / 100));
+	public float calculatePriceOfVAT(Item item) {
+		return sale.calculatePriceOfVAT(item);
 	}
 	
-	public void addToTotalPrice(Amount itemPrice) {
-		sale.getTotalPrice().add(itemPrice);
+	public float calculatePriceIncludingVAT(Item item) {
+		return sale.calculatePriceIncludingVAT(item);
+	}
+	
+	public void addToTotalPriceOfItems(Amount priceOfItem) {
+		sale.addToTotalPriceOfItems(priceOfItem);
+	}
+	
+	public void addToTotalPriceOfVAT(Amount priceOfVAT) {
+		sale.addToTotalPriceOfVAT(priceOfVAT);
+	}
+	
+	public void addToTotalPriceOfItemsIncludingVAT(Amount itemPrice) {
+		sale.getTotalPriceOfItemsIncludingVAT().add(itemPrice);
+	}
+	
+	public void printReceipt() {
+		receipt = sale.createReceipt();
+		printer.printReceipt(receipt);
 	}
 	
 	public java.time.LocalDate getDateOfSale(){
@@ -92,8 +106,8 @@ public class Controller {
 		return sale.getAddress();
 	}
 	
-	public void loopThroughSoldItems() {
-		sale.loopThroughSoldItems();
+	public void printListOfSoldItems() {
+		sale.printListOfSoldItems();
 	}
 	
 	/**
@@ -101,6 +115,18 @@ public class Controller {
 	 */
 	public void sendSaleInfo() {
 		accounting.sendSaleInfo(sale);
+	}
+	
+	public Amount getTotalPriceOfItems() {
+		return sale.getTotalPriceOfItems();
+	}
+	
+	public Amount getTotalPriceOfVAT() {
+		return sale.getTotalPriceOfVAT();
+	}
+	
+	public Amount getTotalPriceOfItemsIncludingVAT() {
+		return sale.getTotalPriceOfItemsIncludingVAT();
 	}
 	
 	public Amount getChange() {

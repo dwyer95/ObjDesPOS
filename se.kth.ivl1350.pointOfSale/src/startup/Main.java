@@ -4,21 +4,18 @@ import controller.*;
 import model.*;
 import view.*;
 
-/**
- * @author Jacob Dwyer
- *
- */
 public class Main {
 	
 	/**
+	 * Starts the application.
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		AccountingSystem accounting = new AccountingSystem();
 		InventorySystem inventory = new InventorySystem();
-		Controller controller = new Controller(accounting, inventory);
-		CashRegister cashRegister = new CashRegister();
+		Printer printer = new Printer();
+		Controller controller = new Controller(accounting, inventory, printer);
 		View view = new View(controller);
 		
 		view.hardCodedUseCase();

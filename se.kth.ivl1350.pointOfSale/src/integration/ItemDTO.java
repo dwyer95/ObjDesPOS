@@ -1,11 +1,6 @@
 package integration;
 import datatypes.*;
 
-/**
- * 
- * @author Jacob Dwyer
- *
- */
 public final class ItemDTO {
 	private final String name;
 	private final Amount price;
@@ -13,7 +8,7 @@ public final class ItemDTO {
 	private final Barcode identifier;
 	
 	/**
-	 * Creates a new instance representing an item.
+	 * Creates a new instance of the ItemDTO class.
 	 * 
 	 * @param name		The name of the item.
 	 * @param price		The price which should appear on the receipt next to the item.
@@ -25,6 +20,16 @@ public final class ItemDTO {
 		this.price = price;
 		this.VATRate = VATRate;
 		this.identifier = identifier;
+	}
+	
+	/**
+	 * Creates a new instance of the ItemDTO class without properties assigned by inputs.
+	 */
+	public ItemDTO() {
+		this.name = "";
+		this.price = new Amount(0f);
+		this.VATRate = 12f;
+		this.identifier = new Barcode(0);
 	}
 	
 	@Override
@@ -58,6 +63,10 @@ public final class ItemDTO {
 		return VATRate;
 	}
 	
+	/**
+	 * 
+	 * @return The item's identifier.
+	 */
 	public Barcode getIdentifier() {
 		return identifier;
 	}

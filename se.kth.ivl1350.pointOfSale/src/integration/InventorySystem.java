@@ -3,11 +3,6 @@ import java.util.ArrayList;
 import model.Item;
 import datatypes.*;
 
-/**
- * 
- * @author Jacob Dwyer
- *
- */
 public class InventorySystem {
 	private ArrayList<ItemDTO> availableItems = new ArrayList<ItemDTO>();
 	
@@ -21,9 +16,11 @@ public class InventorySystem {
 	private static final float CHEESE_VAT = 12f;
 	private static final Barcode CHEESE_IDENTIFIER = new Barcode(173031);
 	
-	public InventorySystem InventorySystem() {
-		InventorySystem inventory = new InventorySystem();
-		return inventory;
+	/**
+	 * Creates an instance of the InventorySystem class.
+	 */
+	public InventorySystem() {
+		
 	}
 	
 	/**
@@ -38,9 +35,8 @@ public class InventorySystem {
 	}
 	
 	/**
-	 * Returns info about scanned item 
-	 * 
-	 * @return
+	 * Returns information about scanned item. 
+	 * @return The information which is returned.
 	 */
 	public ItemDTO retrieveInfo(Barcode enteredItemID) {
 		// loop through list of items
@@ -49,15 +45,5 @@ public class InventorySystem {
 				return item;
 		
 		return null;
-	}
-	
-	
-	// NOT USED! REMOVE!!
-	public void updateInventory() {
-		
-	}
-	
-	public void printReceipt() {
-		
 	}
 }

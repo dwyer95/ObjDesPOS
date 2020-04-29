@@ -8,11 +8,6 @@ import model.*;
 import integration.*;
 import datatypes.*;
 
-/**
- * 
- * @author Jacob Dwyer
- *
- */
 public class View {
 	private Controller controller;
 	
@@ -22,7 +17,8 @@ public class View {
 	
 	/**
 	 *  This method shows the flow of an arbitrary user case instead of
-	 *  having a fully functional user interface
+	 *  having a fully functional user interface. In this case, the customer
+	 *  buys one banana and three packets of cheese.
 	 */
 	public void hardCodedUseCase() {
 		ArrayList<Item> listOfCustomersItems = new ArrayList<Item>();
@@ -38,11 +34,10 @@ public class View {
 		listOfCustomersItems.add(threeCheese);
 		
 		controller.addItemsToAvailableItemsList();
-		
 		controller.initializeSale();
 		
 		for(Item itemCurrentlyBeingScanned : listOfCustomersItems) {
-			ItemDTO scannedItem = new ItemDTO("a", bananaPrice, 0f, bananaBarcode);
+			ItemDTO scannedItem = new ItemDTO();
 			
 			scannedItem = controller.enterItemIdentifier(itemCurrentlyBeingScanned.getIdentifier());
 			controller.addItemsToCurrentSale(itemCurrentlyBeingScanned);
@@ -51,8 +46,13 @@ public class View {
 			int numberOfCurrentItem = itemCurrentlyBeingScanned.getQuantity();
 			while(numberOfCurrentItem != 0) {
 				System.out.println(scannedItem.toString());
+				
+				Amount priceOfVAT = new Amount(controller.calculatePriceOfVAT(itemCurrentlyBeingScanned));
 				Amount priceIncludingVAT = new Amount(controller.calculatePriceIncludingVAT(itemCurrentlyBeingScanned));
-				controller.addToTotalPrice(priceIncludingVAT);
+				
+				controller.addToTotalPriceOfItems(itemCurrentlyBeingScanned.getPrice());
+				controller.addToTotalPriceOfVAT(priceOfVAT);
+				controller.addToTotalPriceOfItemsIncludingVAT(priceIncludingVAT);
 				numberOfCurrentItem--;
 			}
 			
@@ -62,18 +62,10 @@ public class View {
 		Amount paidAmount = new Amount(160f);
 		controller.enterPaidAmount(paidAmount);
 
-		System.out.println("\n######### BEGINNING OF RECEIPT #########");
-		System.out.println("Date: " + controller.getDateOfSale());
-		System.out.println("Time: " + controller.getTimeOfSale().truncatedTo(ChronoUnit.SECONDS));
-		System.out.println(controller.getAddress());
-		controller.loopThroughSoldItems();
-		
-		//System.out.println("Total cost: " + controller.getTotalPrice());
-		System.out.println("############ END OF RECEIPT ############\n");
-		
 		controller.setChange();
 		Amount change = controller.getChange();
+		System.out.println("Money back: " + change.getAmount() + "\n");
 		
-		System.out.println("Money back: " + Math.floor(change.getAmount()));
+		controller.printReceipt();
 	}
 }

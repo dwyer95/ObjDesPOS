@@ -1,10 +1,5 @@
 package datatypes;
 
-/**
- * 
- * @author Jacob Dwyer
- *
- */
 public class Address {
 	private String name;
 	private String street;
