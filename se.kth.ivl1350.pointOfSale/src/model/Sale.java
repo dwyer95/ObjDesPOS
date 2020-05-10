@@ -3,14 +3,16 @@ import integration.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import datatypes.Address;
-import datatypes.Amount;
+import datatypes.*;
 
 /**
  * Represents a single sale.
  */
 public class Sale {
 	private static final int VAT_DIVISOR = 100;
+	
+	// put list of sold items here instead of in view
+	private ArrayList<Item> scannedItems;
 	
 	private java.time.LocalDateTime dateOfSale;
 	private java.time.LocalDateTime timeOfSale;
@@ -50,26 +52,47 @@ public class Sale {
 			soldItems.add(itemToAdd);
 	}
 	
-	/**
-	 * Prints the name, quantity and price of each <code>Item</code> in the <code>soldItems</code>
-	 * list. If the quantity is not more than 1, quantity is not listed.
-	 */
-	public void printListOfSoldItems() {
-		for(Item item : soldItems) {
-			if(item.getQuantity() > 1)
-				System.out.println(item.getName() + " *" + item.getQuantity() + "\t" + item.getPrice().getAmount());
-			else
-				System.out.println(item.getName() + "  \t" + item.getPrice().getAmount());
-		}
+	public String enterItemIdentifier(ItemDTO scannedItem) {
+		//if scannedItem == null, operation fails
+		
+		//addToTotalPriceOfItems(scannedItem.getPrice());
+		//addToTotalPriceOfVAT(calculatePriceOfVAT(scannedItem));
+		//below code better than above??
+		totalPriceOfItems.add(scannedItem.getPrice());
+		totalPriceOfVAT.add(calculatePriceOfVAT(scannedItem));
+		totalPriceOfItemsIncludingVAT.add(calculatePriceIncludingVAT(scannedItem));
+		
+		//return toString of scannedItem and runningtotal
+		StringBuilder itemAndRunningTotal = new StringBuilder();
+		itemAndRunningTotal.append(scannedItem.toString());
+		itemAndRunningTotal.append("\nRunning total: " + totalPriceOfItemsIncludingVAT.getAmount() + "\n");
+		return itemAndRunningTotal.toString();
 	}
 	
 	/**
-	 * Calculates the VAT of an <code>Item</code>.
-	 * @param item The <code>Item</code> whose VAT should be calculated. 
-	 * @return The VAT of the <code>Item</code>.
+	 * Returns a list of sold items containing the name, quantity and price of each <code>Item</code> 
+	 * in the <code>soldItems</code> list. If the quantity is not more than 1, quantity is not listed.
 	 */
-	public float calculatePriceOfVAT(Item item) {
-		return item.getPrice().getAmount() * (item.getVATRate() / VAT_DIVISOR);
+	public String printListOfSoldItems() {
+		StringBuilder soldItemsList = new StringBuilder();
+		for(Item item : soldItems) {
+			if(item.getQuantity() > 1)
+				soldItemsList.append(item.getName() + " *" + item.getQuantity() + "\t" + item.getPrice().getAmount()
+						+ "\n");
+			else
+				soldItemsList.append(item.getName() + "  \t" + item.getPrice().getAmount() + "\n");
+		}
+		return soldItemsList.toString();
+	}
+	
+	/**
+	 * Calculates the VAT of an <code>Item</code> and returns it as an Amount.
+	 * @param item The <code>Item</code> whose VAT should be calculated. 
+	 * @return The VAT of the <code>Item</code>, as an Amount.
+	 */
+	private Amount calculatePriceOfVAT(ItemDTO item) {
+		//item.getPrice().multiply(termToMultiplyWith);
+		return new Amount(item.getPrice().getAmount() * (item.getVATRate() / VAT_DIVISOR));
 	}
 	
 	/**
@@ -77,10 +100,12 @@ public class Sale {
 	 * @param item The <code>Item</code> whose total price should be calculated.
 	 * @return The total price, including VAT, of the <code>Item</code>.
 	 */
-	public float calculatePriceIncludingVAT(Item item) {
-		return item.getPrice().getAmount() + (item.getPrice().getAmount() * 
-				 (item.getVATRate() / VAT_DIVISOR));
+	private Amount calculatePriceIncludingVAT(ItemDTO item) {
+		return new Amount(item.getPrice().getAmount() + (item.getPrice().getAmount() * 
+				 (item.getVATRate() / VAT_DIVISOR)));
 	}
+	
+	// addTo..() methods redundant??
 	
 	/**
 	 * Adds the total price, excluding VAT, of an <code>Item</code> to the total price of items.
@@ -175,8 +200,10 @@ public class Sale {
 	 * Sets the <code>Amount</code> that has been paid by the customer.
 	 * @param amountReceived The <code>Amount</code> received from the customer.
 	 */
-	public void setAmountPaid(Amount amountReceived) {
+	public float setAmountPaid(Amount amountReceived) {
 		amountPaid = amountReceived;
+		setChange();
+		return change.getAmount();
 	}
 	
 	/**
@@ -191,7 +218,7 @@ public class Sale {
 	 * Calculates and sets the <code>change</code> that the customer should receive
 	 * from the current <code>Sale</code>.
 	 */
-	public void setChange() {
+	private void setChange() {
 		change.setAmount((float)Math.floor(amountPaid.getAmount() - totalPriceOfItemsIncludingVAT.getAmount()));
 	}
 }

@@ -45,8 +45,9 @@ public class Controller {
 	 * @param enteredItemID The barcode use to search the inventory system.
 	 * @return The ItemDTO retrieved from the inventory system handler.
 	 */
-	public ItemDTO enterItemIdentifier(Barcode enteredItemID) {
-		return inventory.retrieveInfo(enteredItemID);
+	public String enterItemIdentifier(Barcode enteredItemID) {
+		return sale.enterItemIdentifier(inventory.retrieveInfo(enteredItemID));
+		//return inventory.retrieveInfo(enteredItemID);
 	}
 	
 	/**
@@ -69,27 +70,29 @@ public class Controller {
 	 * Calls the corresponding method in a <code>Sale</code> instance.
 	 * @param paidAmount The amount paid by the customer.
 	 */
-	public void enterPaidAmount(Amount paidAmount) {
-		sale.setAmountPaid(paidAmount);
+	public float enterPaidAmount(Amount paidAmount) {
+		return sale.setAmountPaid(paidAmount);
 	}
+	
 	
 	/**
 	 * Calls the corresponding method in a <code>Sale</code> instance.
 	 * @param item The <code>Item</code> to calculate the VAT of.
 	 * @return The price of the VAT.
 	 */
-	public float calculatePriceOfVAT(Item item) {
-		return sale.calculatePriceOfVAT(item);
-	}
+	/*public void calculatePriceOfVAT(ItemDTO item) {
+		sale.calculatePriceOfVAT(item);
+	}*/
 	
 	/**
 	 * Calls the corresponding method in a <code>Sale</code> instance. 
 	 * @param item The <code>Item</code> to calculate the price, including VAT, of.
 	 * @return The price, including VAT.
 	 */
-	public float calculatePriceIncludingVAT(Item item) {
-		return sale.calculatePriceIncludingVAT(item);
-	}
+	/*public void calculatePriceIncludingVAT(ItemDTO item) {
+		sale.calculatePriceIncludingVAT(item);
+	}*/
+	
 	
 	/**
 	 * Calls the corresponding method in a <code>Sale</code> instance. 
@@ -163,8 +166,8 @@ public class Controller {
 		return sale.getChange();
 	}
 	
-	public void setChange() {
+	/*public void setChange() {
 		sale.setChange();
-	}
+	}*/
 
 }
