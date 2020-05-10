@@ -57,6 +57,18 @@ public class Amount {
 		amount *= termToMultiplyWith.getAmount();
 	}
 	
+	/**
+	 * Divides the amount of the current instance with another <code>Amount</code>.
+	 * @param termToDivideBy The amount to divide by.
+	 */
+	public void divide(Amount termToDivideBy) {
+		if(termToDivideBy == null) {
+			System.out.println("Cannot divide by null");
+			return;
+		}
+		amount *= termToDivideBy.getAmount();
+	}
+	
 	public float getAmount() {
 		return amount;
 	}
