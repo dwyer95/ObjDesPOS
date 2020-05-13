@@ -31,7 +31,6 @@ class InventorySystemTest {
 	private ItemDTO banana;
 	private ItemDTO cheese;
 	private ItemDTO itemDTO;
-	//private String noDB = "Could not establish connection to inventory system database.";
 	
 	@BeforeEach
 	void setUp() {
@@ -54,25 +53,39 @@ class InventorySystemTest {
 		inventory = null;
 		barcode = null;
 	}
-
-	/*@Test
-	void testRetrieveInfoNullBarcode() {
-		Barcode nullBar = null;
-		ItemDTO itemDTO = inventory.retrieveInfo(nullBar);
-		assertNull(itemDTO, "Using null as input parameter does not"
-				+ " result in a null ItemDTO.");
+	
+	/**
+	 * Tests the method <code>retrieveInfo</code> to see if it catches
+	 * <code>InvalidBarcodeException</code>. Fails if the method successfully
+	 * retrieves item info, if the method catches the wrong <code>Exception</code>,
+	 * or if the error message in the correct exception does not contain the 
+	 * invalid <code>Barcode</code>.
+	 */
+	@Test
+	void testInvalidBarcode() {
+		Barcode invalidBar = new Barcode(100001);
+		
+		try {
+			ItemDTO itemDTO = inventory.retrieveInfo(invalidBar);
+			
+			fail("Could scan invalid item");
+		}
+		catch(DatabaseNotRespondingException e) {
+			fail("Catched the wrong exception");
+		}
+		catch(InvalidBarcodeException e) {
+			assertTrue(e.getMessage().contains("" + invalidBar.getBarcode()), "Wrong error message, "
+					+ "does not contain the invalid barcode: " + invalidBar.getBarcode());
+		}
 	}
 	
+	/**
+	 * Tests the method <code>retrieveInfo</code> to see that it catches
+	 * <code>DatabaseNotRespondingException</code>. Fails if it successfully 
+	 * retrieves item info or if it catches the wrong <code>Exception</code>. 
+	 */
 	@Test
-	void testRetrieveInfoNoMatch() {
-		Barcode wrongBar = new Barcode(1234);
-		ItemDTO itemDTO = inventory.retrieveInfo(wrongBar);
-		assertNull(itemDTO, "Using a barcode which does not exist in inventory"
-				+ " system, as input parameter does not result in a null ItemDTO.");
-	}*/
-	
-	@Test
-	void testNoDatabaseConnection() {
+	void testNoDatabaseConnection() throws InventorySystemException {
 		Barcode noDatabaseBar = new Barcode(200002);
 		
 		try {
@@ -81,7 +94,7 @@ class InventorySystemTest {
 			fail("Could scan invalid item");
 		}
 		catch(DatabaseNotRespondingException e) {
-			//assertTrue(e.getMessage().contains(noDB), "Wrong exception");
+			
 		}
 		catch(InvalidBarcodeException e) {
 			fail("Catched the wrong exception");

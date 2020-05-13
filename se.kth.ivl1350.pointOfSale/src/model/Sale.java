@@ -206,7 +206,7 @@ public class Sale {
 	 */
 	public void addAmountPaid(Amount amountReceived) {
 		amountPaid.add(amountReceived);
-		notifyObservers();
+		//notifyObservers();
 	}
 	
 	/**
@@ -223,5 +223,6 @@ public class Sale {
 	 */
 	public void setChange() {
 		change.setAmount((float)Math.floor(amountPaid.getAmount() - totalPriceOfItemsIncludingVAT.getAmount()));
+		notifyObservers();
 	}
 }

@@ -69,13 +69,12 @@ public class Controller {
 			return item;
 		}
 		catch (InvalidBarcodeException e) {
-			System.out.println("FOR DEVELOPERS: " + e);
-			throw new InventorySystemException("Enter identifier operation failed", e);
-			// write e to file??
+			System.out.println("FOR DEVELOPERS: " + e + " " + e.getStackTrace());
+			throw new InventorySystemException("The identifier you entered is invalid.", e);
 		}
 		catch (DatabaseNotRespondingException e) {
-			System.out.println("FOR DEVELOPERS: " + e);
-			throw new InventorySystemException("Enter identifier operation failed.", e);
+			System.out.println("FOR DEVELOPERS: " + e + " " + e.getStackTrace());
+			throw new InventorySystemException("Could not connect to external inventory database. Please contact the database administrator.", e);
 		}
 		
 	}
