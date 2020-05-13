@@ -2,6 +2,7 @@ package model;
 import integration.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import datatypes.Address;
 import datatypes.Amount;
@@ -11,6 +12,8 @@ import datatypes.Amount;
  */
 public class Sale {
 	private static final int VAT_DIVISOR = 100;
+	
+	private List<SaleObserver> saleObservers = new ArrayList<>();
 	
 	private java.time.LocalDateTime dateOfSale;
 	private java.time.LocalDateTime timeOfSale;
@@ -23,6 +26,31 @@ public class Sale {
 	private Amount change;
 	
 	/**
+	 * Adds a <code>saleObserver</code> to the list in saleObservers.
+	 * @param observer The <code>saleObserver</code> to be added to the list.
+	 */
+	public void addSaleObserver(SaleObserver observer) {
+		saleObservers.add(observer);
+	}
+	
+	/**
+	 * Adds each <code>saleObserver</code> in a list to the list saleObservers, in order.
+	 * @param observers The list of <code>saleObservers</code>.
+	 */
+	public void addSaleObservers(List<SaleObserver> observers) {
+		saleObservers.addAll(observers);
+	}
+	
+	/**
+	 * Notifies each observer object in the list <code>saleObservers</code>.
+	 */
+	private void notifyObservers() {
+		for(SaleObserver observer : saleObservers) {
+			observer.newPayment(this);
+		}
+	}
+	
+	/**
 	 * Creates a new instance of the <code>Sale</code> class.
 	 * @param address The location of the store.
 	 */
@@ -30,7 +58,7 @@ public class Sale {
 		this.dateOfSale = java.time.LocalDateTime.now();
 		this.timeOfSale = java.time.LocalDateTime.now();
 		addressOfStore = address;
-		soldItems = new ArrayList<Item>();
+		soldItems = new ArrayList<>();
 		totalPriceOfItems = new Amount(0f);
 		totalPriceOfVAT = new Amount(0f);
 		totalPriceOfItemsIncludingVAT = new Amount(0f);
@@ -172,11 +200,13 @@ public class Sale {
 	}
 	
 	/**
-	 * Sets the <code>Amount</code> that has been paid by the customer.
+	 * Adds the <code>Amount</code> received from the customer to the total amount 
+	 * that has been payed.
 	 * @param amountReceived The <code>Amount</code> received from the customer.
 	 */
-	public void setAmountPaid(Amount amountReceived) {
-		amountPaid = amountReceived;
+	public void addAmountPaid(Amount amountReceived) {
+		amountPaid.add(amountReceived);
+		notifyObservers();
 	}
 	
 	/**

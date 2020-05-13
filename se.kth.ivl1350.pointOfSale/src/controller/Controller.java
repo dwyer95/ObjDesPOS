@@ -1,5 +1,11 @@
 package controller;
-import datatypes.*;
+import datatypes.Amount;
+import exceptions.*;
+import datatypes.Barcode;
+
+import java.util.*;
+
+import datatypes.Address;
 import integration.*;
 import model.*;
 
@@ -8,6 +14,8 @@ import model.*;
  *packages and view.
  */
 public class Controller {
+	private List<SaleObserver> saleObservers = new ArrayList<>();
+	
 	private AccountingSystem accounting;
 	private InventorySystem inventory;
 	private Printer printer;
@@ -31,6 +39,15 @@ public class Controller {
 	 */
 	public void initializeSale() {
 		sale = new Sale(accounting.retrieveAddress());
+		sale.addSaleObservers(saleObservers);
+	}
+	
+	/**
+	 * Calls the corresponding method in <code>Sale</code>.
+	 * @param observer The <code>saleObserver</code> to add.
+	 */
+	public void addSaleObserver(SaleObserver observer) {
+		saleObservers.add(observer);
 	}
 	
 	/**
@@ -44,9 +61,23 @@ public class Controller {
 	 * Calls the corresponding method in the inventory system handler.
 	 * @param enteredItemID The barcode use to search the inventory system.
 	 * @return The ItemDTO retrieved from the inventory system handler.
+	 * @throws InventorySystemException
 	 */
-	public ItemDTO enterItemIdentifier(Barcode enteredItemID) {
-		return inventory.retrieveInfo(enteredItemID);
+	public ItemDTO enterItemIdentifier(Barcode enteredItemID) throws InventorySystemException {
+		try {
+			ItemDTO item = inventory.retrieveInfo(enteredItemID);
+			return item;
+		}
+		catch (InvalidBarcodeException e) {
+			System.out.println("FOR DEVELOPERS: " + e);
+			throw new InventorySystemException("Enter identifier operation failed", e);
+			// write e to file??
+		}
+		catch (DatabaseNotRespondingException e) {
+			System.out.println("FOR DEVELOPERS: " + e);
+			throw new InventorySystemException("Enter identifier operation failed.", e);
+		}
+		
 	}
 	
 	/**
@@ -70,7 +101,7 @@ public class Controller {
 	 * @param paidAmount The amount paid by the customer.
 	 */
 	public void enterPaidAmount(Amount paidAmount) {
-		sale.setAmountPaid(paidAmount);
+		sale.addAmountPaid(paidAmount);
 	}
 	
 	/**

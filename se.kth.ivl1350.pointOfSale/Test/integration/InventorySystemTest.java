@@ -1,5 +1,6 @@
 package integration;
 
+import exceptions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ class InventorySystemTest {
 	private ItemDTO banana;
 	private ItemDTO cheese;
 	private ItemDTO itemDTO;
-
+	//private String noDB = "Could not establish connection to inventory system database.";
+	
 	@BeforeEach
 	void setUp() {
 		availableItems = new ArrayList<ItemDTO>();
@@ -39,6 +41,8 @@ class InventorySystemTest {
 		availableItems.add(banana);
 		availableItems.add(cheese);
 		inventory = new InventorySystem();
+		
+		
 	}
 
 	@AfterEach
@@ -51,7 +55,7 @@ class InventorySystemTest {
 		barcode = null;
 	}
 
-	@Test
+	/*@Test
 	void testRetrieveInfoNullBarcode() {
 		Barcode nullBar = null;
 		ItemDTO itemDTO = inventory.retrieveInfo(nullBar);
@@ -64,7 +68,24 @@ class InventorySystemTest {
 		Barcode wrongBar = new Barcode(1234);
 		ItemDTO itemDTO = inventory.retrieveInfo(wrongBar);
 		assertNull(itemDTO, "Using a barcode which does not exist in inventory"
-				+ " syste, as input parameter does not result in a null ItemDTO.");
+				+ " system, as input parameter does not result in a null ItemDTO.");
+	}*/
+	
+	@Test
+	void testNoDatabaseConnection() {
+		Barcode noDatabaseBar = new Barcode(200002);
+		
+		try {
+			ItemDTO itemDTO = inventory.retrieveInfo(noDatabaseBar);
+			
+			fail("Could scan invalid item");
+		}
+		catch(DatabaseNotRespondingException e) {
+			//assertTrue(e.getMessage().contains(noDB), "Wrong exception");
+		}
+		catch(InvalidBarcodeException e) {
+			fail("Catched the wrong exception");
+		}
 	}
 
 }
