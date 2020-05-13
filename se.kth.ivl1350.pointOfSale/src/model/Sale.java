@@ -206,7 +206,6 @@ public class Sale {
 	 */
 	public void addAmountPaid(Amount amountReceived) {
 		amountPaid.add(amountReceived);
-		//notifyObservers();
 	}
 	
 	/**

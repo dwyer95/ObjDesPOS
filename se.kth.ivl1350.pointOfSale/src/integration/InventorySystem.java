@@ -44,7 +44,6 @@ public class InventorySystem {
 		availableItems.add(databaseError);
 	}
 	
-	// throws checked exception
 	/**
 	 * Returns information about scanned item.
 	 * @param enteredItemID The entered item's identifier.

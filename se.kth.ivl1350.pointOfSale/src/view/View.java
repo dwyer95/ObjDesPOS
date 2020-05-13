@@ -14,7 +14,6 @@ import datatypes.Amount;
  */
 public class View {
 	private Controller controller;
-	private int sales = 3;
 	
 	public View(Controller controller) {
 		this.controller = controller;

@@ -67,7 +67,6 @@ class InventorySystemTest {
 		
 		try {
 			ItemDTO itemDTO = inventory.retrieveInfo(invalidBar);
-			
 			fail("Could scan invalid item");
 		}
 		catch(DatabaseNotRespondingException e) {
@@ -90,7 +89,6 @@ class InventorySystemTest {
 		
 		try {
 			ItemDTO itemDTO = inventory.retrieveInfo(noDatabaseBar);
-			
 			fail("Could scan invalid item");
 		}
 		catch(DatabaseNotRespondingException e) {
