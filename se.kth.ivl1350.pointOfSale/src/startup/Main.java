@@ -21,7 +21,12 @@ public class Main {
 		Controller controller = new Controller(accounting, inventory, printer);
 		View view = new View(controller);
 		
-		view.hardCodedUseCase();
+		int sales = 3;
+		while(sales > 0) {
+			view.hardCodedUseCase();
+			sales--;
+		}
+		
 	}
 
 }

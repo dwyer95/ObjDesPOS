@@ -59,7 +59,7 @@ public class Receipt {
 		receiptInfo.append("VAT:\t\t" + totalPriceOfVAT.getAmount() + "\n");
 		receiptInfo.append("Amount paid:\t\t" + amountPaid.getAmount() + "\n");
 		receiptInfo.append("Amount back:\t\t" + change.getAmount() + "\n");
-		receiptInfo.append("---------------END OF RECEIPT-----------------");
+		receiptInfo.append("---------------END OF RECEIPT-----------------\n");
 		return receiptInfo.toString();
 	}
 }
