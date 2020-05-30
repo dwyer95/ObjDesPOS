@@ -48,8 +48,8 @@ public class InventorySystem {
 	 * Returns information about scanned item.
 	 * @param enteredItemID The entered item's identifier.
 	 * @return The information which is returned.
-	 * @throws InvalidBarcodeException
-	 * @throws DatabaseNotRespondingException
+	 * @throws InvalidBarcodeException If barcode of item does not match any barcode in inventory system.
+	 * @throws DatabaseNotRespondingException If unable to connect to inventory system.
 	 */
 	public ItemDTO retrieveInfo(Barcode enteredItemID) throws InvalidBarcodeException, DatabaseNotRespondingException {
 		if(enteredItemID.getBarcode() == 200002)

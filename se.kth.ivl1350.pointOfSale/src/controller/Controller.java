@@ -61,7 +61,7 @@ public class Controller {
 	 * Calls the corresponding method in the inventory system handler.
 	 * @param enteredItemID The barcode use to search the inventory system.
 	 * @return The ItemDTO retrieved from the inventory system handler.
-	 * @throws InventorySystemException
+	 * @throws InventorySystemException If unable to retrieve item info from inventory system.
 	 */
 	public ItemDTO enterItemIdentifier(Barcode enteredItemID) throws InventorySystemException {
 		try {
@@ -189,12 +189,16 @@ public class Controller {
 		return sale.getTotalPriceOfItemsIncludingVAT();
 	}
 	
+	public Amount getAmountPaid() {
+		return sale.getAmountPaid();
+	}
+	
 	public Amount getChange() {
 		return sale.getChange();
 	}
 	
-	public void setChange() {
-		sale.setChange();
+	public void setChange(float amountPaid) {
+		sale.setChange(amountPaid);
 	}
 
 }

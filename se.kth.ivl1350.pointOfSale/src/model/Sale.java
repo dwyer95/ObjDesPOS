@@ -43,10 +43,11 @@ public class Sale {
 	
 	/**
 	 * Notifies each observer object in the list <code>saleObservers</code>.
+	 * @param paidAmount The amount paid by the customer.
 	 */
-	private void notifyObservers() {
+	private void notifyObservers(float paidAmount) {
 		for(SaleObserver observer : saleObservers) {
-			observer.newPayment(this);
+			observer.newPayment(paidAmount);
 		}
 	}
 	
@@ -219,9 +220,10 @@ public class Sale {
 	/**
 	 * Calculates and sets the <code>change</code> that the customer should receive
 	 * from the current <code>Sale</code>.
+	 * @param paidAmount The amount that has been paid by the customer.
 	 */
-	public void setChange() {
+	public void setChange(float paidAmount) {
 		change.setAmount((float)Math.floor(amountPaid.getAmount() - totalPriceOfItemsIncludingVAT.getAmount()));
-		notifyObservers();
+		notifyObservers(paidAmount);
 	}
 }

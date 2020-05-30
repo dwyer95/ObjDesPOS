@@ -51,6 +51,7 @@ public class View {
 			
 			controller.addItemsToAvailableItemsList();
 			controller.initializeSale();
+			System.out.println("\n...............NEW SALE...............");
 			
 			for(Item itemCurrentlyBeingScanned : listOfCustomersItems) {
 				ItemDTO scannedItem = new ItemDTO();
@@ -91,7 +92,9 @@ public class View {
 			Amount paidAmount3 = new Amount(149f);
 			controller.enterPaidAmount(paidAmount3);
 			
-			controller.setChange();
+			float amountPaid = controller.getAmountPaid().getAmount();
+			controller.setChange(amountPaid);
+			
 			Amount change = controller.getChange();
 			System.out.println("Money back: " + change.getAmount() + "\n");
 			

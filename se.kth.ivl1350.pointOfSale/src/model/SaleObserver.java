@@ -9,7 +9,7 @@ public interface SaleObserver {
 	/**
 	 * Adds a new entry to the <code>payments</code> list, then prints payments, in order,
 	 * to the display.
-	 * @param currentSale The current sale.
+	 * @param amountPaid The amount paid in current sale.
 	 */
-	void newPayment(Sale currentSale);
+	void newPayment(float amountPaid);
 }

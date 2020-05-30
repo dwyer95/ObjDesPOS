@@ -1,6 +1,6 @@
 package view;
-import model.*;
 
+import model.SaleObserver;
 import java.util.*;
 import datatypes.Amount;
 
@@ -11,8 +11,8 @@ public class TotalRevenueView implements SaleObserver {
 	private Amount totalRevenue = new Amount();
 	
 	@Override
-	public void newPayment(Sale currentSale) {
-		addNewPayment(currentSale);
+	public void newPayment(float paidAmount) {
+		addNewPayment(paidAmount);
 		printCurrentState();
 	}
 	
@@ -20,8 +20,8 @@ public class TotalRevenueView implements SaleObserver {
 	 * Adds a new entry to the <code>payments</code> list.
 	 * @param currentSale The current sale.
 	 */
-	private void addNewPayment(Sale currentSale) {
-		Amount paymentToAdd = new Amount(currentSale.getAmountPaid().getAmount());
+	private void addNewPayment(float paidAmount) {
+		Amount paymentToAdd = new Amount(paidAmount);
 		totalRevenue.add(paymentToAdd);
 	}
 	
