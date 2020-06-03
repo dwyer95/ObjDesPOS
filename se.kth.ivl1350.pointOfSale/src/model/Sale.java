@@ -14,7 +14,6 @@ public class Sale {
 	private static final int VAT_DIVISOR = 100;
 	
 	private List<SaleObserver> saleObservers = new ArrayList<>();
-	
 	private java.time.LocalDateTime dateOfSale;
 	private java.time.LocalDateTime timeOfSale;
 	private Address addressOfStore;

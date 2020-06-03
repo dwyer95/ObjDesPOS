@@ -76,7 +76,6 @@ public class Controller {
 			System.out.println("FOR DEVELOPERS: " + e + " " + e.getStackTrace());
 			throw new InventorySystemException("Could not connect to external inventory database. Please contact the database administrator.", e);
 		}
-		
 	}
 	
 	/**
@@ -167,10 +166,6 @@ public class Controller {
 	
 	public java.time.LocalTime getTimeOfSale(){
 		return sale.getTimeOfSale();
-	}
-	
-	public Address getAddress() {
-		return sale.getAddress();
 	}
 	
 	public void printListOfSoldItems() {

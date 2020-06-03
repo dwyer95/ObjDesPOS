@@ -97,7 +97,6 @@ public class View {
 			
 			Amount change = controller.getChange();
 			System.out.println("Money back: " + change.getAmount() + "\n");
-			
 			controller.printReceipt();
 	}
 }
