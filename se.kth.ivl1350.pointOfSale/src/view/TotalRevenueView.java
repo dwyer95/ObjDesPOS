@@ -9,6 +9,7 @@ import datatypes.Amount;
  */
 public class TotalRevenueView implements SaleObserver {
 	private Amount totalRevenue = new Amount();
+	// skapa totalRevenue klass i modell som startar vid systemstart o uppdat observs vid uppdatering
 	
 	@Override
 	public void newPayment(float paidAmount) {
