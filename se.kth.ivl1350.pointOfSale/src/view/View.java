@@ -36,38 +36,16 @@ public class View {
 		Item threeCheese = new Item("Cheese", cheesePrice, 12f, cheeseBarcode, 3);
 		listOfCustomersItems.add(threeCheese);
 		
+		Amount paidAmount;
 		controller.addItemsToAvailableItemsList();
 		controller.initializeSale();
 		
 		for(Item itemCurrentlyBeingScanned : listOfCustomersItems) {
-			ItemDTO scannedItem = new ItemDTO();
-			
-			scannedItem = controller.enterItemIdentifier(itemCurrentlyBeingScanned.getIdentifier());
-			controller.addItemsToCurrentSale(itemCurrentlyBeingScanned);
-			
-			int numberOfCurrentItem = itemCurrentlyBeingScanned.getQuantity();
-			while(numberOfCurrentItem != 0) {
-				System.out.println(scannedItem.toString());
-				
-				Amount priceOfVAT = new Amount(controller.calculatePriceOfVAT(itemCurrentlyBeingScanned));
-				Amount priceIncludingVAT = new Amount(controller.calculatePriceIncludingVAT(itemCurrentlyBeingScanned));
-				
-				controller.addToTotalPriceOfItems(itemCurrentlyBeingScanned.getPrice());
-				controller.addToTotalPriceOfVAT(priceOfVAT);
-				controller.addToTotalPriceOfItemsIncludingVAT(priceIncludingVAT);
-				numberOfCurrentItem--;
-			}
+			System.out.println(controller.enterItemIdentifier(itemCurrentlyBeingScanned.getIdentifier()));
 		}
 		
 		System.out.println("\nTotal price: " + controller.endSale().getAmount());
-		
-		Amount paidAmount = new Amount(160f);
-		controller.enterPaidAmount(paidAmount);
-
-		controller.setChange();
-		Amount change = controller.getChange();
-		System.out.println("Money back: " + change.getAmount() + "\n");
-		
+		System.out.println("Money back: " + controller.enterPaidAmount(paidAmount = new Amount(160f)) + "\n");
 		controller.printReceipt();
 	}
 }
